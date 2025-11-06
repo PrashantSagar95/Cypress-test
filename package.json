@@ -1,0 +1,21 @@
+{
+  "name": "cyprertest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Prashant",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^15.5.0",
+    "cypress-file-upload": "^4.0.6",
+    "cypress-mochawesome-reporter": "^4.0.2"
+  },
+  "devDependencies": {
+    "@4tw/cypress-drag-drop": "^2.3.1",
+    "cypress-iframe": "^1.0.1",
+    "cypress-xpath": "^2.0.1"
+  }
+}
