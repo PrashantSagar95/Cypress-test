@@ -1,0 +1,10 @@
+{
+  "suites": 1,
+  "tests": 1,
+  "passes": 1,
+  "pending": 0,
+  "failures": 0,
+  "start": "2025-11-12T12:33:25.850Z",
+  "duration": 8653,
+  "file": "cypress\\e2e\\tests\\Checkboxes.cy.js"
+}

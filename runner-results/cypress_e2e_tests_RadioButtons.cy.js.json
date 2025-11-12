@@ -1,0 +1,10 @@
+{
+  "suites": 1,
+  "tests": 1,
+  "passes": 1,
+  "pending": 0,
+  "failures": 0,
+  "start": "2025-11-12T12:35:37.172Z",
+  "duration": 12865,
+  "file": "cypress\\e2e\\tests\\RadioButtons.cy.js"
+}

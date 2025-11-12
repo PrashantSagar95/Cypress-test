@@ -4,17 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx cypress run --headed",
+    "cypress:parallel": "cypress-parallel -d cypress\\e2e\tests -s test",
+
+
+    "cy:parallel": "concurrently \"npx cypress run --spec 'cypress/e2e/tests/Assertions.cy.js'\" \"npx cypress run --spec 'cypress/e2e/tests/Alerts.cy.js'\"",
+    "testrun" : "npx cypress run"
   },
   "author": "Prashant",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^15.5.0",
+    "cypress": "^15.6.0",
     "cypress-file-upload": "^4.0.6",
-    "cypress-mochawesome-reporter": "^4.0.2"
+    "cypress-mochawesome-reporter": "^4.0.2",
+    "cypress-parallel": "^0.15.0"
   },
   "devDependencies": {
     "@4tw/cypress-drag-drop": "^2.3.1",
+    "concurrently": "^9.2.1",
     "cypress-iframe": "^1.0.1",
     "cypress-xpath": "^2.0.1"
   }

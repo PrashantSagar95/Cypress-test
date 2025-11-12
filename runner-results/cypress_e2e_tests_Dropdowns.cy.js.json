@@ -1,0 +1,10 @@
+{
+  "suites": 4,
+  "tests": 4,
+  "passes": 0,
+  "pending": 3,
+  "failures": 1,
+  "start": "2025-11-12T12:34:14.400Z",
+  "duration": 24813,
+  "file": "cypress\\e2e\\tests\\Dropdowns.cy.js"
+}
