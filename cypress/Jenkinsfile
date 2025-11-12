@@ -1,0 +1,73 @@
+pipeline {
+  agent any
+  environment {
+    NODE_OPTIONS = "--max-old-space-size=4096"
+  }
+
+  stages {
+    stage('Checkout Code') {
+      steps {
+        checkout scm
+      }
+    }
+
+    stage('Install Dependencies') {
+      steps {
+        sh 'npm ci'
+      }
+    }
+
+    stage('Parallel Cypress Tests') {
+      parallel {
+        stage('Smoke Tests') {
+          steps {
+            sh 'npx cypress run --spec "cypress/e2e/tests/Assertions.cy.js" --browser chrome --headless --reporter mochawesome --reporter-options overwrite=false,html=false,json=true'
+          }
+        }
+
+        stage('Login Tests') {
+          steps {
+            sh 'npx cypress run --spec "cypress/e2e/test/Checkboxes.cy.js" --browser chrome --headless --reporter mochawesome --reporter-options overwrite=false,html=false,json=true'
+          }
+        }
+
+        stage('Checkout Tests') {
+          steps {
+            sh 'npx cypress run --spec "cypress/e2e/Dropdowns.cy.js" --browser chrome --headless --reporter mochawesome --reporter-options overwrite=false,html=false,json=true'
+          }
+        }
+
+        stage('Register Tests') {
+          steps {
+            sh 'npx cypress run --spec "cypress/e2e/CSSLocators.cy.js" --browser chrome --headless --reporter mochawesome --reporter-options overwrite=false,html=false,json=true'
+          }
+        }
+      }
+    }
+
+    stage('Merge & Generate Report') {
+      steps {
+        sh '''
+          npx mochawesome-merge cypress/reports/*.json > cypress/reports/output.json
+          npx mochawesome-report-generator cypress/reports/output.json --reportDir cypress/reports/html
+        '''
+      }
+    }
+
+    stage('Publish Report') {
+      steps {
+        publishHTML (target: [
+          reportDir: 'cypress/reports/html',
+          reportFiles: 'mochawesome.html',
+          reportName: 'Cypress Report'
+        ])
+      }
+    }
+  }
+
+  post {
+    always {
+      archiveArtifacts artifacts: 'cypress/reports/html/*.html', fingerprint: true
+    }
+  }
+}
